@@ -1,16 +1,13 @@
-# dog_breeds_app
+# Dog Breeds App
 
-A new Flutter application.
+Get information on all dog breeds.
 
-## Getting Started
+<a href="https://youtu.be/tC3-TtMlg9M" target="_blank">Live Coding Video on YouTube</a>
 
-This project is a starting point for a Flutter application.
+## Skills Used
 
-A few resources to get you started if this is your first Flutter project:
+* API requests and JSON parsing
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Screenshots
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="assets/images/screenshot.gif">
