@@ -1,6 +1,6 @@
 # Dog Breeds App
 
-Get information on all dog breeds.
+Get information on all official dog breeds.
 
 <a href="https://youtu.be/tC3-TtMlg9M" target="_blank">Live Coding Video on YouTube</a>
 
