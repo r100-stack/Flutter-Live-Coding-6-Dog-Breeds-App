@@ -73,13 +73,14 @@ class _HomeScreenState extends State<HomeScreen> {
 //          itemCount: Provider.of<DogBloc>(context).dogs.length,),
 //      ),
       body: GridView.builder(
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemBuilder: (context, index) {
-            Dog dog = Provider.of<DogBloc>(context).dogs[index];
-            return DogCard(dog);
-          },
-      itemCount: Provider.of<DogBloc>(context).dogs.length,),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, childAspectRatio: .75),
+        itemBuilder: (context, index) {
+          Dog dog = Provider.of<DogBloc>(context).dogs[index];
+          return DogCard(dog);
+        },
+        itemCount: Provider.of<DogBloc>(context).dogs.length,
+      ),
     );
   }
 }

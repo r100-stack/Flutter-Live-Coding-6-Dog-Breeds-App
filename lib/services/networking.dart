@@ -23,7 +23,7 @@ class NetworkHelper {
 
   static downloadDogImage(BuildContext context, Dog dog) async {
     NetworkHelper helper =
-        NetworkHelper('$kApiUrl/images/search?breed_id=${dog.id}&size=small&include_breeds=false');
+        NetworkHelper('$kApiUrl/images/search?breed_id=${dog.id}&size=med&include_breeds=false');
     var data = await helper.getData();
     try {
       Provider.of<DogBloc>(context, listen: false).updateDogImageUrl(dog, data[0]['url']);
