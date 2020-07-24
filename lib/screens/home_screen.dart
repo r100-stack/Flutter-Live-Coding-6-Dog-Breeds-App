@@ -3,6 +3,7 @@ import 'package:dog_breeds_app/blocs/dog_bloc.dart';
 import 'package:dog_breeds_app/constants.dart';
 import 'package:dog_breeds_app/models/dog.dart';
 import 'package:dog_breeds_app/services/networking.dart';
+import 'package:dog_breeds_app/widgets/dog_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -37,14 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
         dogs.add(dogObject);
       }
 
-      for (Dog dogObject in dogs) {
-        NetworkHelper helper = NetworkHelper('$kApiUrl/images/search?breed_id${dogObject.id}');
-        var data = await helper.getData();
-        try {
-          dogObject.imageUrl = data[0]['url'];
-        } catch (e) {
-          print(e);
-        }
+      for (Dog dog in dogs) {
+        dog.isDownloading = true;
+        NetworkHelper.downloadDogImage(context, dog);
       }
 
       Provider.of<DogBloc>(context, listen: false).updateDogsList(dogs);
@@ -67,58 +63,46 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Dog Breeds'),
       ),
-      body: Scrollbar(
-        child: ListView.builder(
-          cacheExtent: 100,
-          itemBuilder: (context, index) {
-            Dog dog = Provider.of<DogBloc>(context).dogs[index];
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: kSmallMargin, vertical: kSmallMargin/2),
-              child: Card(
-                color: Theme.of(context).primaryColorLight,
-                child: Padding(
-                  padding: EdgeInsets.all(kSmallMargin),
-                  child: Column(
-                    children: <Widget>[
-                      CachedNetworkImage(
-                        height: 300,
-                        imageUrl: dog.imageUrl,
-                        placeholder: (context, url) => CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.broken_image),
-                      ),
-                      Text(dog.name, style: Theme.of(context).textTheme.headline4.copyWith(
-                        color: Colors.black87
-                      ),)
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-          itemCount: Provider.of<DogBloc>(context).dogs.length,),
-      ),
-//      body: GridView.builder(
-//          gridDelegate:
-//              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//      body: Scrollbar(
+//        child: ListView.builder(
+//          cacheExtent: 100,
 //          itemBuilder: (context, index) {
 //            Dog dog = Provider.of<DogBloc>(context).dogs[index];
-//            return Card(
-//              color: Theme.of(context).primaryColorLight,
-//              child: Column(
-//                children: <Widget>[
-//                  Flexible(
-//                    child: CachedNetworkImage(
-//                      imageUrl: dog.imageUrl,
-//                      placeholder: (context, url) => CircularProgressIndicator(),
-//                      errorWidget: (context, url, error) => Icon(Icons.broken_image),
-//                    ),
-//                  ),
-//                  Text(dog.name, style: Theme.of(context).textTheme.subtitle1,)
-//                ],
-//              ),
-//            );
+//            return DogCard(dog);
 //          },
-//      itemCount: Provider.of<DogBloc>(context).dogs.length,),
+//          itemCount: Provider.of<DogBloc>(context).dogs.length,),
+//      ),
+      body: GridView.builder(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (context, index) {
+            Dog dog = Provider.of<DogBloc>(context).dogs[index];
+            return DogCard(dog);
+          },
+      itemCount: Provider.of<DogBloc>(context).dogs.length,),
     );
   }
 }
+
+//body: GridView.builder(
+//gridDelegate:
+//SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//itemBuilder: (context, index) {
+//Dog dog = Provider.of<DogBloc>(context).dogs[index];
+//return Card(
+//color: Theme.of(context).primaryColorLight,
+//child: Column(
+//children: <Widget>[
+//Flexible(
+//child: CachedNetworkImage(
+//imageUrl: dog.imageUrl,
+//placeholder: (context, url) => CircularProgressIndicator(),
+//errorWidget: (context, url, error) => Icon(Icons.broken_image),
+//),
+//),
+//Text(dog.name, style: Theme.of(context).textTheme.subtitle1,)
+//],
+//),
+//);
+//},
+//itemCount: Provider.of<DogBloc>(context).dogs.length,),

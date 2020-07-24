@@ -1,4 +1,5 @@
 class Dog {
+
   String bredFor;
   String breedGroup;
   Map<String, String> height = {};
@@ -8,7 +9,9 @@ class Dog {
   String origin;
   String temperament;
   Map<String, String> weight = {};
-  String imageUrl;
+  String imageUrl = '';
+
+  bool isDownloading = false;
 
   Dog(
       {this.bredFor,
