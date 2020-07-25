@@ -9,7 +9,7 @@ class Dog {
   String origin;
   String temperament;
   Map<String, String> weight = {};
-  String imageUrl = '';
+  List<String> imageUrls = [];
 
   bool isDownloading = false;
 

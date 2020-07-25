@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_breeds_app/blocs/dog_bloc.dart';
 import 'package:dog_breeds_app/constants.dart';
 import 'package:dog_breeds_app/models/dog.dart';
+import 'package:dog_breeds_app/screens/dog_screen.dart';
 import 'package:dog_breeds_app/services/networking.dart';
 import 'package:dog_breeds_app/widgets/dog_card.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       for (Dog dog in dogs) {
         dog.isDownloading = true;
-        NetworkHelper.downloadDogImage(context, dog);
+        NetworkHelper.downloadDogImages(context, dog);
       }
 
       Provider.of<DogBloc>(context, listen: false).updateDogsList(dogs);
@@ -60,8 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        title: Text('Dog Breeds'),
+        elevation: 0,
+        title: Text('Dog Breeds', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),),
       ),
 //      body: Scrollbar(
 //        child: ListView.builder(
@@ -72,14 +75,27 @@ class _HomeScreenState extends State<HomeScreen> {
 //          },
 //          itemCount: Provider.of<DogBloc>(context).dogs.length,),
 //      ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, childAspectRatio: .75),
-        itemBuilder: (context, index) {
-          Dog dog = Provider.of<DogBloc>(context).dogs[index];
-          return DogCard(dog);
-        },
-        itemCount: Provider.of<DogBloc>(context).dogs.length,
+      body: Container(
+        margin: EdgeInsets.only(top: 20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: kDefaultBorderRadius
+        ),
+        child: ClipRRect(
+          borderRadius: kDefaultBorderRadius,
+          child: GridView.builder(
+            padding: EdgeInsets.symmetric(vertical: kDefaultBorderMargin / 10),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: .75),
+            itemBuilder: (context, index) {
+              Dog dog = Provider.of<DogBloc>(context).dogs[index];
+              return DogCard(dog, onTap: () {
+                Navigator.pushNamed(context, DogScreen.routeName, arguments: dog);
+              },);
+            },
+            itemCount: Provider.of<DogBloc>(context).dogs.length,
+          ),
+        ),
       ),
     );
   }

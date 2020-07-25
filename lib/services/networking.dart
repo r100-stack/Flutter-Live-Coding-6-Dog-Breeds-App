@@ -21,12 +21,16 @@ class NetworkHelper {
     }
   }
 
-  static downloadDogImage(BuildContext context, Dog dog) async {
+  static downloadDogImages(BuildContext context, Dog dog) async {
     NetworkHelper helper =
-        NetworkHelper('$kApiUrl/images/search?breed_id=${dog.id}&size=med&include_breeds=false');
+        NetworkHelper('$kApiUrl/images/search?breed_id=${dog.id}&size=med&include_breeds=false&limit=100');
     var data = await helper.getData();
     try {
-      Provider.of<DogBloc>(context, listen: false).updateDogImageUrl(dog, data[0]['url']);
+      List<String> imageUrls = [];
+      for (var image in data) {
+        imageUrls.add(image['url']);
+      }
+      Provider.of<DogBloc>(context, listen: false).updateDogImageUrls(dog, imageUrls);
     } catch (e) {
       print(e);
     }

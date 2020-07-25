@@ -13,10 +13,10 @@ class DogBloc extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDogImageUrl(Dog dog, String imageUrl) {
+  void updateDogImageUrls(Dog dog, List<String> imageUrls) {
     for (Dog dogObject in _dogs) {
       if (dogObject.id == dog.id) {
-        dogObject.imageUrl = imageUrl;
+        dogObject.imageUrls = imageUrls;
       }
     }
     notifyListeners();

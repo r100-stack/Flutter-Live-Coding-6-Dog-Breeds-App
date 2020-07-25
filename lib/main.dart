@@ -1,4 +1,6 @@
 import 'package:dog_breeds_app/blocs/dog_bloc.dart';
+import 'package:dog_breeds_app/constants.dart';
+import 'package:dog_breeds_app/screens/dog_screen.dart';
 import 'package:dog_breeds_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,19 @@ class MyApp extends StatelessWidget {
       create: (context) => DogBloc(),
       child: MaterialApp(
         initialRoute: HomeScreen.routeName,
-        routes: {HomeScreen.routeName: (context) => HomeScreen()},
+        onGenerateRoute: (RouteSettings settings) {
+          var routes = <String, WidgetBuilder> {
+            HomeScreen.routeName: (context) => HomeScreen(),
+            DogScreen.routeName: (context) => DogScreen(settings.arguments)
+          };
+          WidgetBuilder builder = routes[settings.name];
+          return MaterialPageRoute(builder: (ctx) => builder(ctx));
+        },
+        theme: ThemeData(
+          primaryColor: kPrimaryColor,
+          primaryColorLight: kPrimaryColorLight,
+          accentColor: kAccentColor
+        ),
       ),
     );
   }

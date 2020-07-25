@@ -28,6 +28,7 @@ dependencies:
   rflutter_alert: ^1.0.3
   cached_network_image: ^2.2.0+1
   draggable_scrollbar: ^0.0.4
+  page_view_indicator: ^2.0.4
 
 
   # The following adds the Cupertino Icons font to your application.
