@@ -11,19 +11,27 @@ class CustomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(kDefaultBorderMargin)
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(kDefaultBorderMargin),
-          child: CachedNetworkImage(
-            imageUrl: imageUrl,
-            placeholder: (context, url) => CustomProgressIndicator(),
-            errorWidget: (context, url, error) =>
-                Icon(Icons.broken_image),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Flexible(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(kDefaultBorderMargin)
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(kDefaultBorderMargin),
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  placeholder: (context, url) => CustomProgressIndicator(),
+                  errorWidget: (context, url, error) =>
+                      Icon(Icons.broken_image),
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
