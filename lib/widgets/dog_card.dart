@@ -21,7 +21,7 @@ class DogCard extends StatelessWidget {
       child: Card(
           color: Theme.of(context).primaryColorLight,
           child: Padding(
-            padding: EdgeInsets.only(top: 5),
+            padding: EdgeInsets.all(5.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
