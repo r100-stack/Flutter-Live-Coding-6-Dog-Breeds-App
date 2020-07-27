@@ -35,13 +35,10 @@ class DogCard extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     color: kAccentColor[100],
-                    child: Hero(
-                      tag: 'dog_name${dog.id}',
-                      child: Text(
-                        dog.name,
-                        textAlign: TextAlign.center,
-                      style: kAppBarTextStyle,
-                      ),
+                    child: Text(
+                      dog.name,
+                      textAlign: TextAlign.center,
+                    style: kAppBarTextStyle,
                     ),
                   )
                 ]),

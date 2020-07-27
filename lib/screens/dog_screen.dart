@@ -27,12 +27,9 @@ class DogScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0,
-        title: Hero(
-          tag: "dog_name${dog.id}",
-          child: Text(
-            dog.name,
-            style: kAppBarTextStyle,
-          ),
+        title: Text(
+          dog.name,
+          style: kAppBarTextStyle,
         ),
       ),
       body: Container(
