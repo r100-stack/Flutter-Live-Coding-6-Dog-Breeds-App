@@ -58,7 +58,7 @@ class DogScreen extends StatelessWidget {
 //                              textAlign: TextAlign.center,
 //                              style: Theme.of(context).textTheme.headline6),
 //                        ),
-                        TitleDescWrappedCard(title: dog.breedGroup),
+                        TitleDescWrappedCard(title: '${dog.breedGroup} Dog'),
                         MetricsBar(dog),
                         OriginCard(dog.origin),
                         TitleDescWrappedCard(
