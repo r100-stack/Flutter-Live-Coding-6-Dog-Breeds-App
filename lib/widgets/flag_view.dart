@@ -1,3 +1,4 @@
+import 'package:dog_breeds_app/constants.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 
@@ -10,19 +11,22 @@ class FlagView extends StatelessWidget {
   Widget build(BuildContext context) {
     print(countryCode);
 
-    return countryCode != null
-        ? Flag(
-            countryCode,
-            height: 40,
-            width: 40,
-          )
-        : Container(
-      height: 40,
-          width: 40,
-          child: Icon(
-              Icons.broken_image,
-              size: 40,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5),
+      child: countryCode != null
+          ? Flag(
+              countryCode,
+              height: kFlagViewSize,
+              width: kFlagViewSize,
+            )
+          : Container(
+              height: kFlagViewSize,
+              width: kFlagViewSize,
+              child: Icon(
+                Icons.broken_image,
+                size: kFlagViewSize,
+              ),
             ),
-        );
+    );
   }
 }

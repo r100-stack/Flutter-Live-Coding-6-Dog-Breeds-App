@@ -10,10 +10,16 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-        imageUrl: imageUrl,
-        placeholder: (context, url) => CustomProgressIndicator(),
-        errorWidget: (context, url, error) => Icon(Icons.broken_image));
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Hero(
+        tag: imageUrl,
+        child: CachedNetworkImage(
+            imageUrl: imageUrl,
+            placeholder: (context, url) => CustomProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(Icons.broken_image)),
+      ),
+    );
 
 //    return Container(
 //      child: Row(

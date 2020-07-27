@@ -26,6 +26,7 @@ class ImagesPageView extends StatelessWidget {
         ),
         PageViewIndicator(
           pageIndexNotifier: _pageIndexNotifier,
+          indicatorPadding: EdgeInsets.all(2),
           length: imageUrls.length,
           normalBuilder: (animationController, index) => Circle(
             size: 8, color: Colors.black87,

@@ -7,6 +7,10 @@ import 'package:dog_breeds_app/widgets/custom_progress_indicator.dart';
 import 'package:dog_breeds_app/widgets/flag_view.dart';
 import 'package:dog_breeds_app/widgets/images_page_view.dart';
 import 'package:dog_breeds_app/widgets/metric_card.dart';
+import 'package:dog_breeds_app/widgets/metrics_bar.dart';
+import 'package:dog_breeds_app/widgets/origins_bar.dart';
+import 'package:dog_breeds_app/widgets/title_desc_wrapped_card.dart';
+import 'package:dog_breeds_app/widgets/wraped_card.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:page_view_indicator/page_view_indicator.dart';
@@ -19,22 +23,16 @@ class DogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> origins = dog.origin.split(', ');
-    origins.removeWhere((element) => element == '');
-    print(origins);
-    print(origins.length);
-    List<FlagView> flagViews = [];
-    for (String origin in origins) {
-      flagViews.add(FlagView(CountryUtils.countryCodesFromName[origin]));
-    }
-
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0,
-        title: Text(
-          dog.name,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+        title: Hero(
+          tag: "dog_name${dog.id}",
+          child: Text(
+            dog.name,
+            style: kAppBarTextStyle,
+          ),
         ),
       ),
       body: Container(
@@ -58,31 +56,25 @@ class DogScreen extends StatelessWidget {
                     borderRadius: kDefaultBorderRadius,
                     child: ListView(
                       children: [
-                        Row(
-                          children: <Widget>[
-                            MetricCard(
-                              dimension: Dimension.Height,
-                              imperial: dog.height['imperial'],
-                              metric: dog.height['metric'],
-                              borderRadius: BorderRadius.only(
-                                  topLeft:
-                                      Radius.circular(kDefaultBorderMargin)),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            MetricCard(
-                              dimension: Dimension.Weight,
-                              imperial: dog.weight['imperial'],
-                              metric: dog.weight['metric'],
-                              borderRadius: BorderRadius.only(
-                                  topRight:
-                                      Radius.circular(kDefaultBorderMargin)),
-                            ),
-                          ],
+//                        WrappedCard(
+//                          child: Text('${dog.breedGroup} Dog',
+//                              textAlign: TextAlign.center,
+//                              style: Theme.of(context).textTheme.headline6),
+//                        ),
+                        TitleDescWrappedCard(title: dog.breedGroup),
+                        MetricsBar(dog),
+                        OriginCard(dog.origin),
+                        TitleDescWrappedCard(
+                          title: 'Temperament',
+                          descString: dog.temperament,
                         ),
-                        Row(
-                          children: flagViews,
+                        TitleDescWrappedCard(
+                          title: 'Bred For',
+                          descString: dog.bredFor,
+                        ),
+                        TitleDescWrappedCard(
+                          title: 'Life Span',
+                          descString: dog.lifeSpan,
                         )
                       ],
                     ),
@@ -96,3 +88,26 @@ class DogScreen extends StatelessWidget {
     );
   }
 }
+
+////                        Row(
+////                          mainAxisAlignment: MainAxisAlignment.center,
+////                          children: [
+////                            Padding(
+////                              padding: EdgeInsets.all(10),
+////                              child: Card(
+////                                color: Theme.of(context).primaryColor,
+////                                elevation: 3,
+////                                child: Padding(
+////                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+////                                  child: Text(
+////                                    '${dog.breedGroup} Dog',
+////                                    textAlign: TextAlign.center,
+////                                    style: Theme.of(context).textTheme.headline6.apply(
+////                                      color: Colors.white
+////                                    ),
+////                                  ),
+////                                ),
+////                              ),
+////                            )
+////                          ],
+////                        ),

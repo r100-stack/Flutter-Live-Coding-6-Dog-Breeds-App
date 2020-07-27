@@ -36,6 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
         dogObject.height['metric'] = dog['height']['metric'];
         dogObject.weight['imperial'] = dog['weight']['imperial'];
         dogObject.weight['metric'] = dog['weight']['metric'];
+
+        dogObject.bredFor == null ? dogObject.bredFor = '' : null;
+        dogObject.breedGroup == null ? dogObject.breedGroup = '' : null;
+        dogObject.lifeSpan == null ? dogObject.lifeSpan = '' : null;
+        dogObject.name == null ? dogObject.name = '' : null;
+        dogObject.origin == null ? dogObject.origin = '' : null;
+        dogObject.temperament == null ? dogObject.temperament = '' : null;
         dogs.add(dogObject);
       }
 
@@ -64,7 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0,
-        title: Text('Dog Breeds', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),),
+        title: Text(
+          'Dog Breeds',
+          style: kAppBarTextStyle,
+        ),
       ),
 //      body: Scrollbar(
 //        child: ListView.builder(
@@ -78,9 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         margin: EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: kDefaultBorderRadius
-        ),
+            color: Colors.white, borderRadius: kDefaultBorderRadius),
         child: ClipRRect(
           borderRadius: kDefaultBorderRadius,
           child: GridView.builder(
@@ -89,9 +97,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: 2, childAspectRatio: .75),
             itemBuilder: (context, index) {
               Dog dog = Provider.of<DogBloc>(context).dogs[index];
-              return DogCard(dog, onTap: () {
-                Navigator.pushNamed(context, DogScreen.routeName, arguments: dog);
-              },);
+              return DogCard(
+                dog,
+                onTap: () {
+                  Navigator.pushNamed(context, DogScreen.routeName,
+                      arguments: dog);
+                },
+              );
             },
             itemCount: Provider.of<DogBloc>(context).dogs.length,
           ),
