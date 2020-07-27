@@ -3,9 +3,13 @@
 Get information on all official dog breeds.
 
 <a href="https://youtu.be/tC3-TtMlg9M" target="_blank">Live Coding Video on YouTube (Part 1)</a>
+<br>
 <a href="https://youtu.be/c3FwyqVaGBk" target="_blank">Live Coding Video on YouTube (Part 2)</a>
+<br>
 <a href="https://youtu.be/uraELIXKiPo" target="_blank">Live Coding Video on YouTube (Part 3)</a>
+<br>
 <a href="https://youtu.be/1kyJDVVG3lA" target="_blank">Live Coding Video on YouTube (Part 4)</a>
+<br>
 <a href="https://youtu.be/SqhKAsC9Euw" target="_blank">Live Coding Video on YouTube (Part 5)</a>
 
 ## Skills Used
