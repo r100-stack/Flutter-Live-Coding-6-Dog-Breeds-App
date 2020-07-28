@@ -27,6 +27,7 @@ class DogScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0,
+        centerTitle: true,
         title: Text(
           dog.name,
           style: kAppBarTextStyle,
@@ -51,29 +52,34 @@ class DogScreen extends StatelessWidget {
                       color: Colors.white, borderRadius: kDefaultBorderRadius),
                   child: ClipRRect(
                     borderRadius: kDefaultBorderRadius,
-                    child: ListView(
-                      children: [
+                    child: Container(
+                      constraints: BoxConstraints(
+                          maxWidth: 1000
+                      ),
+                      child: ListView(
+                        children: [
 //                        WrappedCard(
 //                          child: Text('${dog.breedGroup} Dog',
 //                              textAlign: TextAlign.center,
 //                              style: Theme.of(context).textTheme.headline6),
 //                        ),
-                        TitleDescWrappedCard(title: '${dog.breedGroup} Dog'),
-                        MetricsBar(dog),
-                        OriginCard(dog.origin),
-                        TitleDescWrappedCard(
-                          title: 'Temperament',
-                          descString: dog.temperament,
-                        ),
-                        TitleDescWrappedCard(
-                          title: 'Bred For',
-                          descString: dog.bredFor,
-                        ),
-                        TitleDescWrappedCard(
-                          title: 'Life Span',
-                          descString: dog.lifeSpan,
-                        )
-                      ],
+                          TitleDescWrappedCard(title: '${dog.breedGroup} Dog'),
+                          MetricsBar(dog),
+                          OriginCard(dog.origin),
+                          TitleDescWrappedCard(
+                            title: 'Temperament',
+                            descString: dog.temperament,
+                          ),
+                          TitleDescWrappedCard(
+                            title: 'Bred For',
+                            descString: dog.bredFor,
+                          ),
+                          TitleDescWrappedCard(
+                            title: 'Life Span',
+                            descString: dog.lifeSpan,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -18,31 +18,40 @@ class DogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Card(
-          color: Theme.of(context).primaryColorLight,
-          child: Padding(
-            padding: EdgeInsets.all(5.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child: dog.isDownloading
-                          ? CustomProgressIndicator()
-                          : CustomImage(dog.imageUrls[0]),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).primaryColor, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(30))),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+          child: Card(
+              elevation: 1,
+              color: Theme.of(context).primaryColorLight,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        child: dog.isDownloading
+                            ? CustomProgressIndicator()
+                            : CustomImage(dog.imageUrls[0]),
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    color: kAccentColor[100],
-                    child: Text(
-                      dog.name,
-                      textAlign: TextAlign.center,
-                    style: kAppBarTextStyle,
-                    ),
-                  )
-                ]),
-          )),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: kAccentColor[100],
+//                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: Text(
+                        dog.name,
+                        textAlign: TextAlign.center,
+                        style: kAppBarTextStyle,
+                      ),
+                    )
+                  ])),
+        ),
+      ),
     );
   }
 }

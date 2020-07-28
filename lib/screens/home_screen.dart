@@ -67,10 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    int crossAxisCount = (width / 300).floor();
+    crossAxisCount < 2 ? crossAxisCount = 2 : null;
+
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0,
+        centerTitle: true,
         title: Text(
           'Dog Breeds',
           style: kAppBarTextStyle,
@@ -88,24 +93,34 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         margin: EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: kDefaultBorderRadius),
+            color: Theme.of(context).primaryColorLight, borderRadius: kDefaultBorderRadius),
         child: ClipRRect(
           borderRadius: kDefaultBorderRadius,
-          child: GridView.builder(
-            padding: EdgeInsets.symmetric(vertical: kDefaultBorderMargin / 10),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: .75),
-            itemBuilder: (context, index) {
-              Dog dog = Provider.of<DogBloc>(context).dogs[index];
-              return DogCard(
-                dog,
-                onTap: () {
-                  Navigator.pushNamed(context, DogScreen.routeName,
-                      arguments: dog);
+          child: Align(
+            child: Container(
+              alignment: Alignment.center,
+//              constraints: BoxConstraints(
+//                  maxWidth: 700
+//              ),
+              child: GridView.builder(
+                padding: EdgeInsets.symmetric(vertical: kDefaultBorderMargin / 2, horizontal: kDefaultBorderMargin / 4),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    crossAxisCount: crossAxisCount, childAspectRatio: .75),
+                itemBuilder: (context, index) {
+                  Dog dog = Provider.of<DogBloc>(context).dogs[index];
+                  return DogCard(
+                    dog,
+                    onTap: () {
+                      Navigator.pushNamed(context, DogScreen.routeName,
+                          arguments: dog);
+                    },
+                  );
                 },
-              );
-            },
-            itemCount: Provider.of<DogBloc>(context).dogs.length,
+                itemCount: Provider.of<DogBloc>(context).dogs.length,
+              ),
+            ),
           ),
         ),
       ),

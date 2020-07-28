@@ -3,6 +3,8 @@ import 'package:dog_breeds_app/constants.dart';
 import 'package:dog_breeds_app/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
+import 'dart:io' show Platform;
+
 class CustomImage extends StatelessWidget {
   final String imageUrl;
 
@@ -10,14 +12,34 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isMobile = false;
+    try {
+      if (Platform.isAndroid || Platform.isIOS) {
+        isMobile = true;
+      }
+    } catch (e) {
+      print(e);
+    }
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Hero(
         tag: imageUrl,
-        child: CachedNetworkImage(
-            imageUrl: imageUrl,
-            placeholder: (context, url) => CustomProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.broken_image)),
+        child: isMobile
+            ? CachedNetworkImage(
+                imageUrl: imageUrl,
+                placeholder: (context, url) => CustomProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.broken_image))
+            : Image(
+                image: NetworkImage(imageUrl),
+              ),
+//        child: CachedNetworkImage(
+//            imageUrl: imageUrl,
+//            placeholder: (context, url) => CustomProgressIndicator(),
+//            errorWidget: (context, url, error) => Icon(Icons.broken_image)),
+//      child: Image(
+//        image: NetworkImage(imageUrl),
+//      ),
       ),
     );
 
