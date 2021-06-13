@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "sample-flutter-firebase-8ad49",
     "public": "build/web",
     "ignore": [
       "firebase.json",
