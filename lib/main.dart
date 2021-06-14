@@ -10,6 +10,10 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final Size size;
+
+  const MyApp({this.size});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<DogBloc>(
@@ -17,17 +21,23 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: HomeScreen.routeName,
         onGenerateRoute: (RouteSettings settings) {
-          var routes = <String, WidgetBuilder> {
-            HomeScreen.routeName: (context) => HomeScreen(),
-            DogScreen.routeName: (context) => DogScreen(settings.arguments)
+          var routes = <String, Widget>{
+            HomeScreen.routeName: HomeScreen(),
+            DogScreen.routeName: DogScreen(settings.arguments)
           };
-          WidgetBuilder builder = routes[settings.name];
+          
+          WidgetBuilder builder = (context) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(size: size),
+              child: routes[settings.name],
+            );
+          };
           return MaterialPageRoute(builder: (ctx) => builder(ctx));
         },
         theme: ThemeData(
           primaryColor: kPrimaryColor,
           primaryColorLight: kPrimaryColorLight,
-          accentColor: kAccentColor
+          accentColor: kAccentColor,
         ),
       ),
     );
