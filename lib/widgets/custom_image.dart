@@ -26,8 +26,8 @@ class CustomImage extends StatelessWidget {
         tag: imageUrl,
         child: isMobile
             ? CachedNetworkImage(
-                // imageUrl: 'https://flutter-cors-proxy.herokuapp.com/' + imageUrl,
-                imageUrl: imageUrl,
+                imageUrl: 'https://flutter-cors-proxy.herokuapp.com/' + imageUrl,
+                // imageUrl: imageUrl,
                 placeholder: (context, url) => CustomProgressIndicator(),
                 errorWidget: (context, url, error) => Icon(Icons.broken_image))
             : Image(

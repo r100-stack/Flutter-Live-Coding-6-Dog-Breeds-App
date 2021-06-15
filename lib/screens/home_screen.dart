@@ -71,6 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
     int crossAxisCount = (width / 300).floor();
     crossAxisCount < 2 ? crossAxisCount = 2 : null;
 
+    // print("DOG_HOME_SCR_BUILT");
+
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
